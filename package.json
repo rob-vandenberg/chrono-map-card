@@ -1,0 +1,10 @@
+{
+  "name": "chrono-map-card",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "terser src/chrono-map-card.js -o dist/chrono-map-card.js --compress --mangle"
+  },
+  "devDependencies": {
+    "terser": "^5.0.0"
+  }
+}

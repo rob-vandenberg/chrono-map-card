@@ -29,13 +29,13 @@ jobs:
         run: |
           {
             echo "message<<EOF"
-            git log -1 --pretty=B
+            git log -1 --pretty=format:%B
             echo "EOF"
           } >> $GITHUB_OUTPUT
 
       - name: Get commit author
         id: commit_author
-        run: echo "name=$(git log -1 --pretty=an)" >> $GITHUB_OUTPUT
+        run: echo "name=$(git log -1 --pretty=format:%an)" >> $GITHUB_OUTPUT
 
       - name: Install dependencies
         run: yarn install

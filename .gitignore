@@ -30,6 +30,10 @@ ha/
 *.ai
 *.psd
 *.bat
+*.zip
+
+# Build output (only ever committed by the GitHub Actions build workflow)
+dist/
 
 # IDE
 .vscode/

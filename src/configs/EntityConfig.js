@@ -122,8 +122,8 @@ export default class EntityConfig {
     this.historyLineColor = config.history_line_color ?? this.color;
     this.historyShowDots = config.history_show_dots ?? true;
     this.historyShowLines = config.history_show_lines ?? true;
-    this.historyLineWidth = config.history_line_width ?? 3;
-    this.historyDotRadius = config.history_dot_radius ?? 3;
+    this.historyLineWidth = config.history_line_width ?? defaults.historyLineWidth ?? 3;
+    this.historyDotRadius = config.history_dot_radius ?? defaults.historyDotRadius ?? 3;
     this.fixedX = config.fixed_x;
     this.fixedY = config.fixed_y;
     this.fallbackX = config.fallback_x;

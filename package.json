@@ -1,6 +1,6 @@
 {
   "name": "chrono-map-card",
-  "version": "1.16.2",
+  "version": "1.16.3",
   "description": "A fork of ha-map-card for Home Assistant",
   "main": "src/index.js",
   "scripts": {

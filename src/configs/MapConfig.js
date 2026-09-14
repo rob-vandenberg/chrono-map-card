@@ -92,6 +92,8 @@ export default class MapConfig {
       return new EntityConfig(ent, {
           historyStart: this.historyStart,
           historyEnd: this.historyEnd,
+          historyLineWidth: inputConfig.history_line_width,
+          historyDotRadius: inputConfig.history_dot_radius,
           // Is the date range manager enabled
           dateRangeManagerEnabled: (!!this.historyDateSelection)
       });

@@ -46,7 +46,7 @@ jobs:
       - name: Commit and push
         uses: EndBug/add-and-commit@v10
         with:
-          add: '["dist/${{ env.PROJECT_NAME }}.js"]'
+          add: '["dist/${{ env.PROJECT_NAME }}.js --force"]'
           message: "Publishing version ${{ steps.version.outputs.version }}"
           tag: "v${{ steps.version.outputs.version }}"
           tag_push: '--force'

@@ -34,5 +34,5 @@ jobs:
       - name: Commit built file
         uses: EndBug/add-and-commit@v10
         with:
-          add: '["dist/${{ env.PROJECT_NAME }}.js"]'
+          add: '["dist/${{ env.PROJECT_NAME }}.js --force"]'
           message: "Auto-build minified JS from source v${{ steps.version.outputs.version }}"

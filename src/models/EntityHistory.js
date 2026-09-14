@@ -45,6 +45,8 @@ export default class EntityHistory {
     this.mapPaths.forEach((marker) => marker.remove());
     this.mapPaths = [];
 
+    console.log(`[${this.entityId}] entries=${this.entries.length}`);
+
     let opacityStep;
     let baseOpacity;
 
@@ -63,6 +65,9 @@ export default class EntityHistory {
       const opacity = this.gradualOpacity
           ? baseOpacity + i * opacityStep : undefined;
 
+      const nextEntry = this.entries[i + 1];
+      console.log(`[${this.entityId}] i=${i} opacity=${opacity} from=(${entry.latitude},${entry.longitude}) to=(${nextEntry.latitude},${nextEntry.longitude})`);
+
       if(this.showDots) {
         this.mapPaths.push(
           L.circleMarker([entry.latitude, entry.longitude], 
@@ -77,7 +82,6 @@ export default class EntityHistory {
         );
       }
 
-      const nextEntry = this.entries[i + 1];
       const latlngs = [[entry.latitude, entry.longitude], [nextEntry.latitude, nextEntry.longitude]];
 
       if(this.showLines) {

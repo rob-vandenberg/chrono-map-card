@@ -25,13 +25,17 @@ export default class InitialViewRenderService {
 
     if (!container) return;
 
-    // If the container is already sized, apply the view immediately. Otherwise,
-    // use a one-shot ResizeObserver to wait for the browser to lay out the
-    // container, then apply the view once real dimensions are available.
-    if (container.clientWidth > 0 && container.clientHeight > 0) {
-      this._applyInitialView();
-    } else {
-      const observer = new ResizeObserver(() => {
+    // Wait for the container's size to stop changing before applying the
+    // initial view, rather than firing as soon as it has any nonzero size.
+    // Some cards (e.g. via card_mod) resize the container a second time
+    // shortly after its initial layout - firing on the first nonzero size
+    // would compute the fit against the wrong (smaller) dimensions and
+    // never recompute it, since later resizes only call invalidateSize()
+    // and don't redo the fit-to-bounds calculation.
+    let debounceTimer = null;
+    const observer = new ResizeObserver(() => {
+      if (debounceTimer) clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
         observer.disconnect();
         try {
           if (this.map?.getContainer()?.isConnected) {
@@ -41,9 +45,9 @@ export default class InitialViewRenderService {
         } catch (e) {
           Logger.debug("[InitialViewRenderService] Map no longer available, skipping initial view", e);
         }
-      });
-      observer.observe(container);
-    }
+      }, 200);
+    });
+    observer.observe(container);
   }
 
   _applyInitialView() {

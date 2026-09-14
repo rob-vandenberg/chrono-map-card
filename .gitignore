@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# Virtual environments
+.env
+venv/
+.venv/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Folders
+logs/
+docs/
+backup/
+artwork/
+screenshot/
+release/
+github/
+thermostat/
+ha/ 
+
+# Files
+*.ai
+*.psd
+*.bat
+
+# IDE
+.vscode/
+.idea/

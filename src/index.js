@@ -1,12 +1,16 @@
 import MapCard from "./components/MapCard.js"
 import MapCardEntityMarker from "./components/MapCardEntityMarker.js"
+import { version } from '../package.json'
 
 if (!customElements.get("chrono-map-card")) {
   customElements.define("chrono-map-card", MapCard);
   customElements.define("chrono-map-card-entity-marker", MapCardEntityMarker);
   console.info(
-    `%cchrono-map-card: CHRONO_MAP_CARD_VERSION`,
-    'color: orange; font-weight: bold; background: black'
+    `%c CHRONO-%cMAP%c-CARD %c v${version} `,
+    'background-color: #101010; color: #FFFFFF; font-weight: bold; padding: 2px 0 2px 4px; border-radius: 3px 0 0 3px;',
+    'background-color: #101010; color: #4676d3; font-weight: bold; padding: 2px 0;',
+    'background-color: #101010; color: #FFFFFF; font-weight: bold; padding: 2px 4px 2px 0;',
+    'background-color: #1E1E1E; color: #FFFFFF; font-weight: bold; padding: 2px 4px; border-radius: 0 3px 3px 0;'
   )
 }
 

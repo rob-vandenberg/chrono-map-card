@@ -130,7 +130,7 @@ export default class EntityHistoryManager {
       Logger.debug(`[EntityHistoryManager] Skipping history subscription for ${this.entity.id}; no history configured`);
       return;
     }
-    this.history = new EntityHistory(this.entity.id, this.entity.tooltip, this.entity.config.historyLineColor, this.entity.config.gradualOpacity, this.entity.config.historyShowDots, this.entity.config.historyShowLines);
+    this.history = new EntityHistory(this.entity.id, this.entity.tooltip, this.entity.config.historyLineColor, this.entity.config.gradualOpacity, this.entity.config.historyShowDots, this.entity.config.historyShowLines, this.entity.config.historyLineWidth, this.entity.config.historyDotRadius);
     this.historyService.subscribe(this.entity.id, start, end, this.react.bind(this), this.entity.config.useBaseEntityOnly);
   }
 

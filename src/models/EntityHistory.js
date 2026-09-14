@@ -18,15 +18,19 @@ export default class EntityHistory {
   mapPaths = [];
   showDots = true;
   showLines = true;
+  lineWidth = 3;
+  dotRadius = 3;
   needRerender = false;
 
-  constructor(entityId, entityTitle, color, gradualOpacity, showDots, showLines) {
+  constructor(entityId, entityTitle, color, gradualOpacity, showDots, showLines, lineWidth, dotRadius) {
     this.entityId = entityId;
     this.entityTitle = entityTitle;
     this.color = color;
     this.gradualOpacity = gradualOpacity;
     this.showDots = showDots;
     this.showLines = showLines;
+    this.lineWidth = lineWidth;
+    this.dotRadius = dotRadius;
   }
 
   /** @param {TimelineEntry} entry  */
@@ -44,8 +48,6 @@ export default class EntityHistory {
     }
     this.mapPaths.forEach((marker) => marker.remove());
     this.mapPaths = [];
-
-    console.log(`[${this.entityId}] entries=${this.entries.length}`);
 
     let opacityStep;
     let baseOpacity;
@@ -65,14 +67,11 @@ export default class EntityHistory {
       const opacity = this.gradualOpacity
           ? baseOpacity + i * opacityStep : undefined;
 
-      const nextEntry = this.entries[i + 1];
-      console.log(`[${this.entityId}] i=${i} opacity=${opacity} from=(${entry.latitude},${entry.longitude}) to=(${nextEntry.latitude},${nextEntry.longitude})`);
-
       if(this.showDots) {
         this.mapPaths.push(
           L.circleMarker([entry.latitude, entry.longitude], 
             {
-              radius: 3,
+              radius: this.dotRadius,
               color: this.color,
               opacity,
               fillOpacity: opacity,
@@ -82,6 +81,7 @@ export default class EntityHistory {
         );
       }
 
+      const nextEntry = this.entries[i + 1];
       const latlngs = [[entry.latitude, entry.longitude], [nextEntry.latitude, nextEntry.longitude]];
 
       if(this.showLines) {
@@ -89,6 +89,7 @@ export default class EntityHistory {
           L.polyline(latlngs, {
             color: this.color,
             opacity,
+            weight: this.lineWidth,
             interactive: false,
             // Round caps from adjacent segments stack on the shared vertex
             // and make joints darker than the segments (#164).
